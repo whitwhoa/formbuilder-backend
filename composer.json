@@ -1,0 +1,12 @@
+{
+    "name": "commanderZiltoid/formbuilder-backend",
+    "description": "Package used to handle backend rendering and validation of forms created using kevinchappell/formBuilder",
+    "autoload": {
+        "psr-4":{
+            "commanderZiltoid\\formbuilder-backend\\": "src/"
+        }
+    },
+    "require":{
+        "jeffochoa/validator-factory": "^1.0"
+    }
+}

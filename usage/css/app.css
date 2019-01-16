@@ -1,0 +1,14 @@
+.form-builder-wrapper{
+    max-width:800px;
+    border:1px solid lime;
+    margin-right:auto;
+    margin-left:auto;
+    margin-top:100px;
+}
+#formBuilder .form-actions {
+    width:100%;
+}
+#formBuilder .save-button {
+    float:none !important;
+    width:100%;
+}
