@@ -99,10 +99,28 @@ $(document).ready(function(){
                 events: {
                     click: function(){
                         // obtain json data of created form
-                        console.log(formBuilder.actions.getData('json', true));
+                        console.log(formBuilder.actions.getData('json'));
+                        postToServer(formBuilder.actions.getData('json'));
                     }
                 }
             }
         ]
     });
 });
+
+function postToServer(d) {
+    $.ajax({
+        url: '/validate.php',
+        type: 'POST',
+        dataType: 'JSON',
+        data: {
+            fields: d
+        },
+        success:function(r){
+            console.log(r);
+        },
+        error:function(r){
+            console.log(r);
+        }
+    });
+}

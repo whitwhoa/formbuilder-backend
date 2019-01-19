@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4ce8efb1d4344877cdb49d109dbef714",
+    "content-hash": "5774aa6fe3ace947d0424fe372a72438",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -867,10 +867,40 @@
             "time": "2019-01-03T09:07:35+00:00"
         }
     ],
-    "packages-dev": [],
+    "packages-dev": [
+        {
+            "name": "whitwhoa/simple-mysql",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/whitwhoa/simple-mysql.git",
+                "reference": "00e0aa334a52c81c80811b1346888986d55c4f3b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/whitwhoa/simple-mysql/zipball/00e0aa334a52c81c80811b1346888986d55c4f3b",
+                "reference": "00e0aa334a52c81c80811b1346888986d55c4f3b",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "whitwhoa\\SimpleMySQL\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A more simple way to interact with MySQL via php",
+            "time": "2019-01-16T14:58:54+00:00"
+        }
+    ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "whitwhoa/simple-mysql": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

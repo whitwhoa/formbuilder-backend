@@ -1,12 +1,16 @@
 {
-    "name": "commanderZiltoid/formbuilder-backend",
+    "name": "whitwhoa/formbuilder-backend",
     "description": "Package used to handle backend rendering and validation of forms created using kevinchappell/formBuilder",
     "autoload": {
         "psr-4":{
-            "commanderZiltoid\\formbuilder-backend\\": "src/"
+            "whitwhoa\\FormBuilderBackend\\": "src/"
         }
     },
     "require":{
+        "php": "^7.2",
         "jeffochoa/validator-factory": "^1.0"
+    },
+	"require-dev": {
+        "whitwhoa/simple-mysql": "dev-master"
     }
 }
