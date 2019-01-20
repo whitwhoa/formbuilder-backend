@@ -83,6 +83,31 @@ $(document).ready(function(){
                 'subtype'
             ]
         },
+        replaceFields: [
+            {
+                type:"select",
+                label: "Select",
+                values:[
+                    {label:'', value:''},
+                    {label:'', value:''}
+                ]
+            },
+            {
+                type:"radio-group",
+                label: "Radio Group",
+                values:[
+                    {label:'', value:''},
+                    {label:'', value:''}
+                ]
+            },
+            {
+                type:"checkbox-group",
+                label: "Radio Group",
+                values:[
+                    {label:'', value:''}
+                ]
+            }
+        ],
         // typeUserEvents:{
         //     'date':{
         //         onadd: function(fld){
@@ -109,6 +134,8 @@ $(document).ready(function(){
 });
 
 function postToServer(d) {
+    var $emd = $('#errorMessageDiv');
+    var $smd = $('#successMessageDiv');
     $.ajax({
         url: '/validate.php',
         type: 'POST',
@@ -117,10 +144,23 @@ function postToServer(d) {
             fields: d
         },
         success:function(r){
-            console.log(r);
+            $smd.show();
+            $emd.hide();
         },
         error:function(r){
-            console.log(r);
+            if(r.status === 422){
+                console.log(r.responseJSON.errors);
+                $smd.hide();
+                $emd.html((function(){
+                    var s = '<ul>';
+                    r.responseJSON.errors.forEach(function(v){
+                        s += '<li>' + v + '</li>';
+                    });
+                    s += '</ul>';
+                    return s;
+                })());
+                $emd.show();
+            }
         }
     });
 }
