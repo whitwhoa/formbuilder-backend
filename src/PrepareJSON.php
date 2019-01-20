@@ -2,22 +2,26 @@
 
 namespace whitwhoa\FormBuilderBackend;
 
+use Ramsey\Uuid\Uuid;
+
 
 class PrepareJSON {
 
     private $fields;
-    private $defaultStringMaxLength = 100;
-    private $defaultTextAreaRows = 3;
+    private $defaultTextMaxLength = 100;
+    private $defaultTextAreaMaxLength = 1000;
+    private $meta;
 
-    public function __construct(string $jsonString='')
+    public function __construct(string $jsonString='', array $meta=[])
     {
         if($jsonString !== ''){
-            $this->setFields($jsonString);
+            $this->setFields($jsonString, $meta);
         }
     }
 
-    public function setFields(string $jsonString) : void {
+    public function setFields(string $jsonString, array $meta=[]) : void {
         $this->fields = json_decode($jsonString);
+        $this->meta = $meta;
         $this->prepareFields();
     }
 
@@ -72,6 +76,10 @@ class PrepareJSON {
                     break;
             }
         }
+        $this->fields[] = (object)[
+            'type' => 'meta',
+            'data' => (object)array_merge(['id' => Uuid::uuid4()->toString()], $this->meta)
+        ];
     }
 
     /**
@@ -209,7 +217,7 @@ class PrepareJSON {
             if(isset($this->fields[$key]->maxlength)){
                 $a[] = 'max:' . $this->fields[$key]->maxlength;
             } else {
-                $a[] = 'max:' . $this->defaultStringMaxLength;
+                $a[] = 'max:' . $this->defaultTextAreaMaxLength;
             }
             return $a;
         })());
@@ -232,7 +240,7 @@ class PrepareJSON {
             if(isset($this->fields[$key]->maxlength)){
                 $a[] = 'max:' . $this->fields[$key]->maxlength;
             } else {
-                $a[] = 'max:' . $this->defaultStringMaxLength;
+                $a[] = 'max:' . $this->defaultTextMaxLength;
             }
             return $a;
         })());

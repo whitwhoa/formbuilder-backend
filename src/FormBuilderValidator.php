@@ -116,7 +116,7 @@ class FormBuilderValidator {
      */
     private function checkboxGroup(array $cg, int $key) : void {
         $rules = [];
-        $rules['label']         = 'required|max:100';
+        $rules['label']         = 'sometimes|max:100';
         $rules['required']      = isset($cg['required']) ? 'boolean' : '';
         $rules['inline']        = isset($cg['inline']) ? 'boolean' : '';
         $rules['values']        = ['required', function($attribute, $value, $fail){
@@ -212,7 +212,7 @@ class FormBuilderValidator {
      */
     private function paragraph(array $p, int $key) : void {
         $rules = [];
-        $rules['label']         = 'required|max:100';
+        $rules['label']         = 'required|max:1000';
         $v = $this->vf->make($p, $rules);
         $this->generateErrors($v, $key);
     }

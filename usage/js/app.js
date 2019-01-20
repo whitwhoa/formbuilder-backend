@@ -143,7 +143,7 @@ function postToServer(d) {
     var $emd = $('#errorMessageDiv');
     var $smd = $('#successMessageDiv');
     $.ajax({
-        url: '/validate.php',
+        url: '/main.php',
         type: 'POST',
         dataType: 'JSON',
         data: {
