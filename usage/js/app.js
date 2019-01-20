@@ -102,7 +102,7 @@ $(document).ready(function(){
             },
             {
                 type:"checkbox-group",
-                label: "Radio Group",
+                label: "Checkbox Group",
                 values:[
                     {label:'', value:''}
                 ]
@@ -123,9 +123,15 @@ $(document).ready(function(){
                 type:'button',
                 events: {
                     click: function(){
-                        // obtain json data of created form
-                        console.log(formBuilder.actions.getData('json'));
-                        postToServer(formBuilder.actions.getData('json'));
+                        // obtain json data of created form (and remove className property)
+                        var data = JSON.parse(formBuilder.actions.getData('json'));
+                        data.forEach(function(val, index){
+                            delete data[index].className;
+                        });
+                        data = JSON.stringify(data);
+                        console.log(data);
+                        postToServer(data);
+                        //postToServer(formBuilder.actions.getData('json'));
                     }
                 }
             }

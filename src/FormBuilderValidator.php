@@ -5,7 +5,7 @@ namespace whitwhoa\FormBuilderBackend;
 use Illuminate\Validation\Validator;
 use JeffOchoa\ValidatorFactory;
 
-class ValidateFormBuilder {
+class FormBuilderValidator {
 
     /**
      * @var ValidatorFactory

@@ -1,10 +1,12 @@
 <?php require __DIR__.'/../vendor/autoload.php';
 
-use whitwhoa\FormBuilderBackend\ValidateFormBuilder;
+use whitwhoa\FormBuilderBackend\FormBuilderValidator;
+use whitwhoa\FormBuilderBackend\PrepareJSON;
 use whitwhoa\SimpleMySQL\MySQLCon;
 
 
-$fv = new ValidateFormBuilder($_POST['fields']);
+
+$fv = new FormBuilderValidator($_POST['fields']);
 if($fv->hasErrors()){
     http_response_code(422);
     $response = [
@@ -12,6 +14,8 @@ if($fv->hasErrors()){
         'errors' => $fv->getErrors()
     ];
 } else {
+    $pj = new PrepareJSON($_POST['fields']);
+    echo var_export($pj->getFields(), true);die;
     $response = [
         'status'    => 200
     ];
