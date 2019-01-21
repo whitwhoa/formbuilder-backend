@@ -27,7 +27,8 @@ if($_POST){
     $fsv = new FormSubmissionValidator($f->form_json, $_POST);
     if($fsv->passes()){
         // Save form input HERE
-        header('Location: success.php');
+        $db->query("INSERT INTO submissions(form_id, `data`) VALUES(?,?)", [$_POST['formId'], json_encode($_POST)])->exec();
+        header('Location: success.html');
         exit;
     }
     //echo var_export($fsv->getErrors(), true);die;

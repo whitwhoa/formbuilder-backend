@@ -38,7 +38,12 @@ class FormSubmissionValidator {
         $rules = [];
         foreach(json_decode($formJson) as $e){
             if(property_exists($e, 'name')){
-                $rules[$e->name] = $e->validation;
+                if($e->type === 'checkbox-group'){ // since checkbox-group is an array, add validation for array
+                    $rules[$e->name] = explode('|', $e->validation)[0] . '|array';
+                    $rules[$e->name . '.*'] = $e->validation;
+                } else {
+                    $rules[$e->name] = $e->validation;
+                }
             }
         }
         $v = $this->vf->make($params, $rules);
@@ -52,6 +57,9 @@ class FormSubmissionValidator {
                 $this->errors[$k] = is_array($e) ? $e[0] : $e;
             }
         }
+//        echo '<pre>';
+//        echo var_export($this->errors, true);
+//        echo '</pre>';die;
     }
 
 
