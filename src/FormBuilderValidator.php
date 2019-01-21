@@ -237,7 +237,7 @@ class FormBuilderValidator {
      */
     private function radioGroup(array $rg, int $key) : void {
         $rules = [];
-        $rules['label']         = 'required|max:100';
+        $rules['label']         = 'sometimes|max:100';
         $rules['required']      = isset($rg['required']) ? 'boolean' : '';
         $rules['inline']        = isset($rg['inline']) ? 'boolean' : '';
         $rules['values']        = ['required', function($attribute, $value, $fail){

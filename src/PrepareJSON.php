@@ -140,6 +140,7 @@ class PrepareJSON {
             } else {
                 $a[] = 'sometimes';
             }
+            $a[] = 'integer';
             if(isset($this->fields[$key]->min)){
                 $a[] = 'min:' . $this->fields[$key]->min;
             }

@@ -143,7 +143,7 @@ function postToServer(d) {
     var $emd = $('#errorMessageDiv');
     var $smd = $('#successMessageDiv');
     $.ajax({
-        url: '/main.php',
+        url: '/validate-form-create.php',
         type: 'POST',
         dataType: 'JSON',
         data: {
@@ -152,6 +152,9 @@ function postToServer(d) {
         success:function(r){
             $smd.show();
             $emd.hide();
+            setTimeout(function(){
+                location.href = 'view-form.php?f='+r.responseJSON.formId;
+            }, 1000);
         },
         error:function(r){
             if(r.status === 422){
