@@ -12,3 +12,7 @@
     float:none !important;
     width:100%;
 }
+
+.fb-radio input, .fb-radio label{
+    display:inline;
+}

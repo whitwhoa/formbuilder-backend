@@ -2,7 +2,7 @@
 
 namespace whitwhoa\FormBuilderBackend;
 
-class RenderFormElements {
+class FormRenderer {
 
     private $renderType;
     private $formData;

@@ -1,7 +1,7 @@
 <?php require __DIR__.'/../vendor/autoload.php';
 
-use whitwhoa\FormBuilderBackend\RenderFormElements;
-use whitwhoa\FormBuilderBackend\FormSubmissionValidator;
+use whitwhoa\FormBuilderBackend\FormRenderer;
+use whitwhoa\FormBuilderBackend\SubmissionValidator;
 use whitwhoa\SimpleMySQL\MySQLCon;
 
 // Insure form id is present in query string
@@ -24,7 +24,7 @@ if(!$f){
  */
 if($_POST){
 
-    $fsv = new FormSubmissionValidator($f->form_json, $_POST);
+    $fsv = new SubmissionValidator($f->form_json, $_POST);
     if($fsv->passes()){
         // Save form input HERE
         $db->query("INSERT INTO submissions(form_id, `data`) VALUES(?,?)", [$_POST['formId'], json_encode($_POST)])->exec();
@@ -32,14 +32,14 @@ if($_POST){
         exit;
     }
     //echo var_export($fsv->getErrors(), true);die;
-    $rf = new RenderFormElements($f->form_json, $_POST, $fsv->getErrors());
+    $rf = new FormRenderer($f->form_json, $_POST, $fsv->getErrors());
     $formElements = $rf->getRenderedHtml();
 
 }
 // Not POST so we simply need to retrieve the form json data from our persistence layer, render, and display
 else {
 
-    $rf = new RenderFormElements($f->form_json);
+    $rf = new FormRenderer($f->form_json);
     $formElements = $rf->getRenderedHtml();
 
 }
@@ -71,7 +71,7 @@ else {
                 <div class="card-body">
                     <form id="myForm" action="" method="POST">
                         <?php echo $formElements; ?>
-                        <div class="text-right">
+                        <div class="text-center">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </form>

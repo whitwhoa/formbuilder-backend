@@ -5,7 +5,7 @@ namespace whitwhoa\FormBuilderBackend;
 use Ramsey\Uuid\Uuid;
 
 
-class PrepareJSON {
+class ElementPreper {
 
     private $fields;
     private $defaultTextMaxLength = 100;

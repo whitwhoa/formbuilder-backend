@@ -59,13 +59,19 @@
             <?php endif; ?>
             <?php foreach($e->values as $k => $v): ?>
                 <div class="form-check <?php echo property_exists($e, 'inline') ? 'form-check-inline' : ''?>">
-                    <input class="form-check-input" type="radio" name="<?php echo $e->name; ?>" id="<?php echo $e->name . '_' . $k; ?>"
+                    <input class="form-check-input<?php echo $this->errors[$e->name] ? ' is-invalid' : '' ?>"
+                           type="radio" name="<?php echo $e->name; ?>" id="<?php echo $e->name . '_' . $k; ?>"
                            value="<?php echo (isset($v->value) && $v->value != '') ? $v->value : $v->label ?>"
                     <?php echo isset($this->old[$e->name]) ? ((isset($v->value) && $v->value != '' && $v->value == $this->old[$e->name]) ? 'checked' :
                         ($this->old[$e->name] === $v->label ? 'checked' : '')) : '' ?>>
                     <label class="form-check-label" for="<?php echo $e->name . '_' . $k; ?>"><?php echo $v->label; ?></label>
                 </div>
             <?php endforeach; ?>
+            <?php if(isset($this->errors[$e->name])): ?>
+                <div class="invalid-feedback" style="display:block;">
+                    <strong><?php echo $this->errors[$e->name]; ?></strong>
+                </div>
+            <?php endif; ?>
         </div>
 
     <?php elseif($e->type === 'number'): ?>
@@ -74,8 +80,8 @@
             <label for="<?php echo $e->name; ?>" class="control-label"><?php echo $e->label; ?></label>
             <input id="<?php echo $e->name; ?>" type="number" class="form-control<?php echo $this->errors[$e->name] ? ' is-invalid' : '' ?>"
                    name="<?php echo $e->name; ?>" value="<?php echo isset($this->old[$e->name]) ? $this->old[$e->name] : '' ?>"
-                    <?php if(property_exists($e, 'min')): ?>min="<?php echo $e->min; ?>"<?php endif; ?>
-                    <?php if(property_exists($e, 'max')): ?>max="<?php echo $e->max; ?>"<?php endif; ?>>
+                    <?php if(property_exists($e, 'min') && $e->min != ''): ?>min="<?php echo $e->min; ?>"<?php endif; ?>
+                    <?php if(property_exists($e, 'max') && $e->max != ''): ?>max="<?php echo $e->max; ?>"<?php endif; ?>>
             <?php if(isset($this->errors[$e->name])): ?>
                 <div class="invalid-feedback">
                     <strong><?php echo $this->errors[$e->name]; ?></strong>

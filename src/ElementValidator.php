@@ -5,7 +5,7 @@ namespace whitwhoa\FormBuilderBackend;
 use Illuminate\Validation\Validator;
 use JeffOchoa\ValidatorFactory;
 
-class FormBuilderValidator {
+class ElementValidator {
 
     /**
      * @var ValidatorFactory
@@ -124,11 +124,11 @@ class FormBuilderValidator {
                 if(!array_key_exists('label', $v) || $v['label'] === ''){
                     return $fail('Option must be present');
                 }
-                if(strlen($v['label']) > 100){
-                    return $fail('Option must not exceed 100 characters');
+                if(strlen($v['label']) > 250){
+                    return $fail('Option must not exceed 250 characters');
                 }
-                if(array_key_exists('value', $v) && strlen($v['value']) > 100){
-                    return $fail('Option value must not exceed 100 characters');
+                if(array_key_exists('value', $v) && strlen($v['value']) > 250){
+                    return $fail('Option value must not exceed 250 characters');
                 }
                 if(array_key_exists('selected', $v) && $v['selected'] !== true){
                     return $fail('Selected value must be true');
@@ -171,7 +171,7 @@ class FormBuilderValidator {
      */
     private function header(array $h, int $key) : void {
         $rules = [];
-        $rules['label']         = 'required|max:100';
+        $rules['label']         = 'required|max:250';
         $rules['subtype']       = 'required|in:h1,h2,h3,h4';
         $v = $this->vf->make($h, $rules);
         $this->generateErrors($v, $key);
@@ -212,7 +212,7 @@ class FormBuilderValidator {
      */
     private function paragraph(array $p, int $key) : void {
         $rules = [];
-        $rules['label']         = 'required|max:1000';
+        $rules['label']         = 'required|max:10000';
         $v = $this->vf->make($p, $rules);
         $this->generateErrors($v, $key);
     }
@@ -245,11 +245,11 @@ class FormBuilderValidator {
                 if(!array_key_exists('label', $v) || $v['label'] === ''){
                     return $fail('Option must be present');
                 }
-                if(strlen($v['label']) > 100){
-                    return $fail('Option must not exceed 100 characters');
+                if(strlen($v['label']) > 250){
+                    return $fail('Option must not exceed 250 characters');
                 }
-                if(array_key_exists('value', $v) && strlen($v['value']) > 100){
-                    return $fail('Option value must not exceed 100 characters');
+                if(array_key_exists('value', $v) && strlen($v['value']) > 250){
+                    return $fail('Option value must not exceed 250 characters');
                 }
                 if(array_key_exists('selected', $v) && $v['selected'] !== true){
                     return $fail('Selected value must be true');
@@ -288,11 +288,11 @@ class FormBuilderValidator {
                 if(!array_key_exists('label', $v) || $v['label'] === ''){
                     return $fail('Option must be present');
                 }
-                if(strlen($v['label']) > 100){
-                    return $fail('Option must not exceed 100 characters');
+                if(strlen($v['label']) > 250){
+                    return $fail('Option must not exceed 250 characters');
                 }
-                if(array_key_exists('value', $v) && strlen($v['value']) > 100){
-                    return $fail('Option value must not exceed 100 characters');
+                if(array_key_exists('value', $v) && strlen($v['value']) > 250){
+                    return $fail('Option value must not exceed 250 characters');
                 }
                 if(array_key_exists('selected', $v) && $v['selected'] !== true){
                     return $fail('Selected value must be true');
